@@ -1,1 +1,0 @@
-//el objetivo de este archivo definir las operaciones del servidor atravez de las url 
