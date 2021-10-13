@@ -10,4 +10,4 @@ const ProductosSchema = Schema ({
     estado: Boolean,
 })
 
-module.exports = model ('productos', ProductosSchema);
+module.exports = mongoose.model ('productos', ProductosSchema);

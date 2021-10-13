@@ -12,6 +12,10 @@ const morgan = require('morgan');
 const mongoose = require ('mongoose');
 //importamos la configuracion de mongoosej que esat en la carrpeta config.database
 const dbConfig = require('./config/database'); 
+
+app.use(express.json());
+
+
 //vamos a declarar la configuracion con mongoose
 mongoose.connect(dbConfig.dbStringConnect)
 //este then catch nos ayudara a visualizrar por consola si la conexion a bd fue realizada o si hayalgun error

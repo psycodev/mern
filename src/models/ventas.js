@@ -16,4 +16,4 @@ const VentasSchema = Schema ({
     
 })
 
-module.exports = model ('ventas', VentasSchema);
+module.exports = mongoose.model ('ventas', VentasSchema);
