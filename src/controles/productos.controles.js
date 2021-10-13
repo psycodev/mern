@@ -2,8 +2,19 @@
 //importamos el ProductosSchema definiendo la constante y llamandolo desde la ruta
 const ProductosSchema = require('../models/productos')
 //definimos la funcion que va a listar los productos (get)
-const getProductos = (req,res) => {
-    
+const getProductos = async (req,res) => {
+        //creamos la funcion que va a listar los productos
+        //encapsulamos todo en un try catch para verificar si hay algun error nos muestre en pantalla
+        try{ //instaciamos la variable donde se va a amacenar la solicitudes para listar los productos se va a usar ProductosSchema.find(req.body.id)
+            let productos = await ProductosSchema.find();
+        //pedimos qeu nos retorne la lista de los objetos almacenados 
+        res.json({msg: productos });}
+        //y si no que nos muestre el error por consola
+        catch (err){
+            console.log(err)
+        }
+        //el else es para mostrar un error al usuario de que los parametros solicitados se diligenciaron mal
+        
 }
 //definimos la funcion que va a crear un nuevo producto (post)
 //el async y el await son fuciones qeu sirven para decirle al servidor que no resuleva la funcion antes o depues del tiempo de carga de la conexion de la base de datos 
@@ -34,17 +45,15 @@ const updateProducto = (req,res) => {
 }
 //definimos la funcion que va a eliminar algun producto (delete)
 const deleteProducto = async (req,res) => {
-
 //el if que se crea es para decirle que no me arroje los objetos como undefined
-
 if(typeof req.body != 'undefined'){
     //creamos la funcion que va a realizara la insercion dle nuevo productos
     //encapsulamos todo en un try catch para verificar si hay algun error nos muestre en pantalla
     try{
         //para el delete hay una funcion predeterminada que esta en el schema llamada "findOneAndRemove" y este va a hacer la busqueda por ID
-        await ProductosSchema.findOneAndRemove(req.body.id)
+        await ProductosSchema.findOneAndDelete(req.body.id)
     //pedimos qeu nos retorne por un mensaje si el producto fue agregado por
-    res.json({msg: 'el producto fue eliminado con exito' + producto.id});}
+    res.json({msg: 'el producto fue eliminado con exito' + req.body.id});}
     catch (err){
         console.log(err)
     }
