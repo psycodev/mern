@@ -13,7 +13,7 @@ const getProductos = async (req,res) => {
         catch (err){
             console.log(err)
         }
-        //el else es para mostrar un error al usuario de que los parametros solicitados se diligenciaron mal
+        
         
 }
 //definimos la funcion que va a crear un nuevo producto (post)
@@ -39,9 +39,31 @@ const createProducto = async (req,res) =>  {
     }
 }
 //definimos la funcion que va a modificar  los datos de algun productos (put)
-const updateProducto = (req,res) => {
+const updateProducto = async (req,res) => {
+    if(typeof req.body != 'undefined'){
+     //creamos la funcion que va a listar los productos
+        //encapsulamos todo en un try catch para verificar si hay algun error nos muestre en pantalla
+        try{ //llamamos la variable que va a realizar la busqeuda y el update del producto deseado (findOneAndUpdate), este producto es llamado por su ID
+            await ProductosSchema.findOneAndUpdate(
+                //declaramos en un jso los parametros de la busqeuda del id 
+                {_id: req.body.id},
+                //en otro json declaramos los valores que deseamos modificar del schema y le pedimos qeu los remplaza por lso ingresados en el body
+                {
+                    descripcion: req.body.descripcion,
+                    valorUnit: req.body.valorUnit,
+                    estado: req.body.estado 
+                }
 
-
+            );
+        //pedimos qeu nos retorne la lista de los objetos almacenados 
+        res.json({msg: "producto actualizado con exito" + req.body.id });}
+        //y si no que nos muestre el error por consola
+        catch (err){
+            console.log(err)
+        }
+    }else{
+        res.json({msg: "Los parametros diligenciados no son los correctos, verifique e intente nuevamente"})
+    }
 }
 //definimos la funcion que va a eliminar algun producto (delete)
 const deleteProducto = async (req,res) => {
