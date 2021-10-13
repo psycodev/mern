@@ -5,12 +5,14 @@ const {Router} = require ('express');
 const router = Router(); 
 //importamos la ruta de los controladores las
 const {ventasControl}= require("../controles");
+//creamos la ruta para llamar a la verificion de ventas
+const verificacionProductos = require ("../middlewares/verificacion.productos")
 //establecemos el router.get el cual listara todos los resultados obtenidos de los objetos almacenados
  //llamamos el metodo getVentas qeu se hizo en el arvhico de controlardores (ventasControl.getVentas)
 router.get('/',ventasControl.getVentas);
 //establecemos el router.post el cual  agregara a  el objeto isertado por el usuaario a los almacenados
 //llamamos el metodo createVenta  qeu se hizo en el arvhico de controlardores
-router.post('/', ventasControl.createVenta);  
+router.post('/', verificacionProductos, ventasControl.createVenta);  
 //establecemos el router.put el cual modificara  los resultados solicitados por el usuario de los objetos que estan almacenados
 //llamamos el metodo updateVenta  qeu se hizo en el arvhico de controlardores
 router.put('/', ventasControl.updateVenta);

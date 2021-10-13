@@ -7,12 +7,11 @@ const Schema = mongoose.Schema;
 const VentasSchema = Schema ({
     fecha: Date,
     valor: Number,
-    idMercancia: Number,
     cantidadProd: Number,
-    idCliente: Number,
-    nombreCliente: String,
+    documentoCLiente: Number,
+    nombreCliente: String, 
     nombreVendedor: String,
-    valorTotal: Number,
+    documentoVendedor: Number
     
 })
 
